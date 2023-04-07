@@ -1,25 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react"
 
-function App() {
+// We use Route in order to define the different routes of our application
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
+import { useAuthContext } from './Hooks/useAuthContext'
+
+import Layout from "./Pages/Layout"
+import Dashboard from "./Pages/Dashboard"
+import Product from "./Pages/Product"
+import Purchase from "./Pages/Purchase"
+import Order from "./Pages/Order"
+import Supplier from  "./Pages/Supplier"
+import Customer from "./Pages/Customer"
+import Login from "./Pages/Login"
+import Register from "./Pages/Signup"
+import Profile from "./Pages/Profile"
+ 
+const App = () => {
+
+  const { user } = useAuthContext()
+ 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <>
+      <BrowserRouter>
+          <Routes>
 
+            <Route path="/" element={user ? <Layout /> : <Navigate to="/login" />}>
+              <Route index element={<Dashboard />} />
+              <Route path="product" element={<Product />} />
+              <Route path="purchase" element={<Purchase />} />
+              <Route path="order" element={<Order />} />
+              <Route path="supplier" element={<Supplier />} />
+              <Route path="customer" element={<Customer />} />
+              <Route path="profile" element={<Profile />} />
+            </Route>
+
+            <Route 
+              path="/login" 
+              element={!user ? <Login /> : <Navigate to="/" />} 
+            />
+
+            <Route 
+              path="/signup" 
+              element={!user ? <Register /> : <Navigate to="/" />} 
+            />
+
+            <Route path="*" element={<Navigate to="/login" />} />
+  
+          </Routes>
+      </BrowserRouter>
+
+    </>
+  );
+};
+ 
 export default App;

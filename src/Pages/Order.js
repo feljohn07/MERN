@@ -59,7 +59,7 @@ export const CreateForm = (props) => {
 
         console.log("form create", newOrder)
     
-        await fetch("http://localhost:5000/order/add", {
+        await fetch(`${process.env.REACT_APP_URL}order/add`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -125,7 +125,7 @@ export const CreateForm = (props) => {
     
     const getCustomers = async (inputValue) => {
 
-        const response = await fetch(`http://localhost:5000/customer`)
+        const response = await fetch(`${process.env.REACT_APP_URL}customer`)
         if (!response.ok) {
             const message = `An error occurred: ${response.statusText}`
             window.alert(message)
@@ -317,7 +317,7 @@ const UpdateForm = (props) => {
         async function fetchData() {
             
             setFormLoading(true)
-            const response = await fetch(`http://localhost:5000/order/${id}`)
+            const response = await fetch(`${process.env.REACT_APP_URL}order/${id}`)
         
             if (!response.ok) {
                 const message = `An error has occurred: ${response.statusText}`
@@ -355,7 +355,7 @@ const UpdateForm = (props) => {
         // When a post request is sent to the create url, we'll add a new record to the database.
         const updateCustomer = { ...form }
     
-        await fetch(`http://localhost:5000/order/update/${props.id}`, {
+        await fetch(`${process.env.REACT_APP_URL}order/update/${props.id}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -465,7 +465,7 @@ const DeleteConfirm = (props) => {
 
         setIsSubmitting(true)
 
-        await fetch(`http://localhost:5000/order/delete/${props.id}`, {
+        await fetch(`${process.env.REACT_APP_URL}order/delete/${props.id}`, {
             method: "DELETE"
         })
         props.handleClose()
@@ -542,7 +542,7 @@ export default function Order(props) {
 
             setIsLoading(true)
 
-            const response = await fetch(`http://localhost:5000/order?limit=${limit}&page=${page}&query=${query}`)
+            const response = await fetch(`${process.env.REACT_APP_URL}order?limit=${limit}&page=${page}&query=${query}`)
             if (!response.ok) {
                 const message = `An error occurred: ${response.statusText}`
                 window.alert(message)
@@ -582,7 +582,7 @@ export default function Order(props) {
 
     async function getOrders() {
 
-        const response = await fetch(`http://localhost:5000/order?limit=${limit}&page=${page}&product_id=${props.product_id ? props.product_id : ""}`)
+        const response = await fetch(`${process.env.REACT_APP_URL}order?limit=${limit}&page=${page}&product_id=${props.product_id ? props.product_id : ""}`)
         if (!response.ok) {
             const message = `An error occurred: ${response.statusText}`
             window.alert(message)

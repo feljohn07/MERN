@@ -18,6 +18,9 @@ import Profile from "./Pages/Profile"
 const App = () => {
 
   const { user } = useAuthContext()
+
+  console.log(process.env.REACT_APP_CLIENT_ID);//printing it to console
+  console.log(process.env.REACT_APP_URL);//printing it to console
  
   return (
     <>

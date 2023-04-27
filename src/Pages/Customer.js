@@ -40,7 +40,7 @@ const CreateForm = (props) => {
 
         console.log("form create", newCustomer)
     
-        await fetch("http://localhost:5000/customer/add", {
+        await fetch("${process.env.REACT_APP_URL}customer/add", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -169,7 +169,7 @@ const UpdateForm = (props) => {
         async function fetchData() {
             
             setFormLoading(true)
-            const response = await fetch(`http://localhost:5000/customer/${id}`)
+            const response = await fetch(`${process.env.REACT_APP_URL}customer/${id}`)
         
             if (!response.ok) {
                 const message = `An error has occurred: ${response.statusText}`
@@ -206,7 +206,7 @@ const UpdateForm = (props) => {
         // When a post request is sent to the create url, we'll add a new record to the database.
         const updateCustomer = { ...form }
     
-        await fetch(`http://localhost:5000/customer/update/${props.id}`, {
+        await fetch(`${process.env.REACT_APP_URL}customer/update/${props.id}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -281,7 +281,7 @@ const DeleteConfirm = (props) => {
 
         setIsSubmitting(true)
 
-        await fetch(`http://localhost:5000/customer/delete/${props.id}`, {
+        await fetch(`${process.env.REACT_APP_URL}customer/delete/${props.id}`, {
             method: "DELETE"
         })
         props.handleClose()
@@ -358,7 +358,7 @@ export default function Customer() {
 
             setIsLoading(true)
 
-            const response = await fetch(`http://localhost:5000/customer?limit=${limit}&page=${page}&query=${query}`)
+            const response = await fetch(`${process.env.REACT_APP_URL}?limit=${limit}&page=${page}&query=${query}`)
             if (!response.ok) {
                 const message = `An error occurred: ${response.statusText}`
                 window.alert(message)
@@ -398,7 +398,7 @@ export default function Customer() {
 
     async function getCustomers() {
 
-        const response = await fetch(`http://localhost:5000/customer?limit=${limit}&page=${page}`)
+        const response = await fetch(`${process.env.REACT_APP_URL}customer?limit=${limit}&page=${page}`)
         if (!response.ok) {
             const message = `An error occurred: ${response.statusText}`
             window.alert(message)

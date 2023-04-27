@@ -7,7 +7,7 @@ export default function Dashboard() {
     
     async function initDashboard() {
 
-        const response = await fetch(`http://localhost:5000/dashboard`)
+        const response = await fetch(`${process.env.REACT_APP_URL}dashboard`)
         if (!response.ok) {
             const message = `An error occurred: ${response.statusText}`
             window.alert(message)

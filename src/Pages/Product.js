@@ -45,7 +45,7 @@ const CreateForm = (props) => {
 
         console.log("form create", newCustomer)
     
-        await fetch("http://localhost:5000/product/add", {
+        await fetch(`${process.env.REACT_APP_URL}product/add`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -194,7 +194,7 @@ const UpdateForm = (props) => {
         async function fetchData() {
             
             setFormLoading(true)
-            const response = await fetch(`http://localhost:5000/product/${id}`)
+            const response = await fetch(`${process.env.REACT_APP_URL}product/${id}`)
         
             if (!response.ok) {
                 const message = `An error has occurred: ${response.statusText}`
@@ -231,7 +231,7 @@ const UpdateForm = (props) => {
         // When a post request is sent to the create url, we'll add a new record to the database.
         const updateCustomer = { ...form }
     
-        await fetch(`http://localhost:5000/product/update/${props.id}`, {
+        await fetch(`${process.env.REACT_APP_URL}product/update/${props.id}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -317,7 +317,7 @@ const DeleteConfirm = (props) => {
 
         setIsSubmitting(true)
 
-        await fetch(`http://localhost:5000/product/delete/${props.id}`, {
+        await fetch(`${process.env.REACT_APP_URL}product/delete/${props.id}`, {
             method: "DELETE"
         })
         props.handleClose()
@@ -436,7 +436,7 @@ export default function Product() {
 
         setQuery(value)
 
-        const response = await fetch(`http://localhost:5000/product?limit=${limit}&page=${page}&query=${query}`)
+        const response = await fetch(`${process.env.REACT_APP_URL}product?limit=${limit}&page=${page}&query=${query}`)
         if (!response.ok) {
             const message = `An error occurred: ${response.statusText}`
             window.alert(message)
@@ -471,7 +471,7 @@ export default function Product() {
 
     async function getProducts() {
 
-        const response = await fetch(`http://localhost:5000/product?limit=${limit}&page=${page}`)
+        const response = await fetch(`${process.env.REACT_APP_URL}product?limit=${limit}&page=${page}`)
         if (!response.ok) {
             const message = `An error occurred: ${response.statusText}`
             window.alert(message)

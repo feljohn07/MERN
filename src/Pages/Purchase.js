@@ -60,7 +60,7 @@ export const CreateForm = (props) => {
 
         console.log("form create", newPurchase)
     
-        await fetch("http://localhost:5000/purchase/add", {
+        await fetch(`${process.env.REACT_APP_URL}purchase/add`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -125,7 +125,7 @@ export const CreateForm = (props) => {
 
     const getSuppliers = async (inputValue) => {
 
-        const response = await fetch(`http://localhost:5000/supplier`)
+        const response = await fetch(`${process.env.REACT_APP_URL}supplier`)
         if (!response.ok) {
             const message = `An error occurred: ${response.statusText}`
             window.alert(message)
@@ -311,7 +311,7 @@ const UpdateForm = (props) => {
         async function fetchData() {
             
             setFormLoading(true)
-            const response = await fetch(`http://localhost:5000/purchase/${id}`)
+            const response = await fetch(`${process.env.REACT_APP_URL}purchase/${id}`)
         
             if (!response.ok) {
                 const message = `An error has occurred: ${response.statusText}`
@@ -348,7 +348,7 @@ const UpdateForm = (props) => {
         // When a post request is sent to the create url, we'll add a new record to the database.
         const updatePurchase = { ...form }
     
-        await fetch(`http://localhost:5000/purchase/update/${props.id}`, {
+        await fetch(`${process.env.REACT_APP_URL}purchase/update/${props.id}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -463,7 +463,7 @@ const DeleteConfirm = (props) => {
 
         setIsSubmitting(true)
 
-        await fetch(`http://localhost:5000/purchase/delete/${props.id}`, {
+        await fetch(`${process.env.REACT_APP_URL}purchase/delete/${props.id}`, {
             method: "DELETE"
         })
         props.handleClose()
@@ -544,7 +544,7 @@ export default function Purchase(props) {
 
             setIsLoading(true)
 
-            const response = await fetch(`http://localhost:5000/purchase?limit=${limit}&page=${page}&query=${query}`)
+            const response = await fetch(`${process.env.REACT_APP_URL}purchase?limit=${limit}&page=${page}&query=${query}`)
             if (!response.ok) {
                 const message = `An error occurred: ${response.statusText}`
                 window.alert(message)
@@ -584,7 +584,7 @@ export default function Purchase(props) {
 
     async function getPurchases() {
 
-        const response = await fetch(`http://localhost:5000/purchase?limit=${limit}&page=${page}&product_id=${props.product_id ? props.product_id : ""}`)
+        const response = await fetch(`${process.env.REACT_APP_URL}purchase?limit=${limit}&page=${page}&product_id=${props.product_id ? props.product_id : ""}`)
         if (!response.ok) {
             const message = `An error occurred: ${response.statusText}`
             window.alert(message)

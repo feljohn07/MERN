@@ -40,7 +40,7 @@ const CreateForm = (props) => {
 
         console.log("form create", newCustomer)
     
-        await fetch("${process.env.REACT_APP_URL}customer/add", {
+        await fetch(`${process.env.REACT_APP_URL}customer/add`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import image from '../Images/dogs/image3.jpeg'
+import image from '../Images/image5.jpg'
 import { useLogin } from "../Hooks/useLogin"
 import { useGoogleLogin } from '@react-oauth/google'
 

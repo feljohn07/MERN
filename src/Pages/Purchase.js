@@ -236,7 +236,7 @@ export const CreateForm = (props) => {
                         </div> */}
 
                         <div className="form-group mb-3">
-                            <label htmlFor="purchase_price"> <span className='fw-bold'>Purchase Price</span> | Retail Price: <span class="badge bg-info"> {props.retail_price}</span></label>
+                            <label htmlFor="purchase_price"> <span className='fw-bold'>Wholesale Price</span> | Retail Price: <span class="badge bg-info"> {props.retail_price}</span></label>
                             <input
                                 type="number"
                                 className= { errors?.purchase_price != "required" ? "form-control" : "form-control is-invalid"} 

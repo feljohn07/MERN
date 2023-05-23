@@ -15,7 +15,7 @@ export const authReducer = (state, action) => {
 
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, { 
-    user: null
+    user: "null"
   })
 
   // check if user is logged in on page refresh based on local storage data

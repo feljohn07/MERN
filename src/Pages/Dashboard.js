@@ -66,7 +66,7 @@ export default function Dashboard() {
                         <div class="card-body">
                             <div class="row align-items-center no-gutters">
                                 <div class="col me-2">
-                                    <div class="text-uppercase text-info fw-bold text-xs mb-1"><span>Inventrory cost</span></div>
+                                    <div class="text-uppercase text-info fw-bold text-xs mb-1"><span>Inventrory Value</span></div>
                                     <div class="text-dark fw-bold h5 mb-0 me-3"><span>P { inventory?.products?.inventory_value }</span></div>
                                 </div>
                                 <div class="col-auto"><i class="fas fa-money-check-alt fa-2x text-gray-300"></i></div>

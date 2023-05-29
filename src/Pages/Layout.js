@@ -31,7 +31,7 @@ export default function Layout() {
                     <div className="container-fluid d-flex flex-column p-0">
 
                         <a className="navbar-brand d-flex justify-content-center align-items-center sidebar-brand m-0" href="/">
-                            <div className="sidebar-brand-icon rotate-n-15"><i className="fas fa-laugh-wink"></i></div>
+                            <div className="sidebar-brand-icon"><i className="fas fa-box-open"></i></div>
                             <div className="sidebar-brand-text mx-3"><span>Inventory</span></div>
                         </a>
 
@@ -41,37 +41,37 @@ export default function Layout() {
 
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/">
-                                    <i className="fas fa-fw fa-cog"></i> Dashboard
+                                    <i className="far fa-chart-bar"></i> Dashboard
                                 </NavLink>
                             </li>
 
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/product">
-                                    <i className="fas fa-fw fa-cog"></i> Product
+                                    <i className="fas fa-boxes"></i> Product
                                 </NavLink>
                             </li>
 
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/purchase">
-                                    <i className="fas fa-fw fa-cog"></i> Purchase
+                                    <i className="fas fa-history"></i> Purchase History
                                 </NavLink>
                             </li>
 
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/order">
-                                    <i className="fas fa-fw fa-cog"></i> Order
+                                    <i className="fas fa-history"></i> Order History
                                 </NavLink>
                             </li>
 
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/supplier">
-                                    <i className="fas fa-fw fa-cog"></i> Supplier
+                                    <i className="fas fa-store"></i> Supplier
                                 </NavLink>
                             </li>
 
                             <li className="nav-item">
                                 <NavLink className="nav-link" to="/customer">
-                                    <i className="fas fa-fw fa-cog"></i> Customer
+                                    <i className="fas fa-address-book"></i> Customer
                                 </NavLink>
                             </li>
 

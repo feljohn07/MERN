@@ -654,6 +654,18 @@ export default function Product() {
                                         })
                                     }
 
+                                    {
+                                        !products.length && !isLoading? 
+                                            <tr>
+                                                <td colSpan={10} className='text-center'>
+                                                    <span className='mt-5 mb-5'> Not Found /  No Data </span>
+                                                </td>
+                                            </tr>
+                                        :
+                                            null
+                                           
+                                    }
+
                                 </tbody>
                             </table>
                         </div>

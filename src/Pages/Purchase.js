@@ -695,7 +695,7 @@ export default function Purchase(props) {
                                     {
                                         !purchases.length && !isLoading ?
                                             <tr>
-                                                <td colSpan={5} className='text-center'>
+                                                <td colSpan={8} className='text-center'>
                                                     <span className='mt-5 mb-5'> Not Found /  No Data </span>
                                                 </td>
                                             </tr>

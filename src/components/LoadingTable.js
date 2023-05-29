@@ -1,9 +1,6 @@
 import React from 'react'
 
-export default function LoadingTable() {
-
-    const row = 4;
-    const col = 3;
+export default function LoadingTable({row, col}) {
 
     const renderTable = () => {
         const table = [];

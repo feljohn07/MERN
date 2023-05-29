@@ -488,7 +488,7 @@ export default function Customer() {
                                     {   
 
                                         isLoading ?
-                                            <LoadingTable />
+                                            <LoadingTable col={5} row={10} />
                                         :
                                         customers.map((customer, index) => {
                                             return (

@@ -6,7 +6,7 @@ import { Button } from 'react-bootstrap'
 import Tab from 'react-bootstrap/Tab'
 import Tabs from 'react-bootstrap/Tabs'
 
-import { useAuthContext } from '../Hooks/useAuthContext'
+import LoadingTable from '../components/LoadingTable'
 
 import Purchase, { CreateForm as PurchaseCreateForm } from './Purchase'
 import Order, { CreateForm as OrderCreateForm } from './Order'
@@ -415,6 +415,7 @@ export default function Product() {
     const [ showModal, setShowModal ] = useState(false)
     const [ showFullModal, setshowFullModal ] = useState(false)
     const [ fullscreen, setFullscreen ] = useState(false)
+    const [ isLoading, setIsLoading ] = useState(false)
 
     const handleClose = () => {
         setShowModal(false)
@@ -435,6 +436,7 @@ export default function Product() {
     async function searchTable(value) {
 
         setQuery(value)
+        setIsLoading(true)
 
         const response = await fetch(`${process.env.REACT_APP_URL}product?limit=${limit}&page=${page}&query=${query}`)
         if (!response.ok) {
@@ -452,6 +454,7 @@ export default function Product() {
         setProducts(products)
         setNumOfPages(numOfPages)
         setNumOfRecords(numOfRecords)
+        setIsLoading(false)
 
         // switch to first page
         setPage(0)
@@ -471,6 +474,8 @@ export default function Product() {
 
     async function getProducts() {
 
+        setIsLoading(true)
+
         const response = await fetch(`${process.env.REACT_APP_URL}product?limit=${limit}&page=${page}`)
         if (!response.ok) {
             const message = `An error occurred: ${response.statusText}`
@@ -487,6 +492,7 @@ export default function Product() {
         setProducts(products)
         setNumOfPages(numOfPages)
         setNumOfRecords(numOfRecords)
+        setIsLoading(false)
 
         console.log("result", result)
 
@@ -559,6 +565,9 @@ export default function Product() {
                                 </thead>
                                 <tbody>
                                     {
+                                        isLoading ? 
+                                            <LoadingTable row={10} col={10} /> 
+                                        :
                                         products.map((product, index) => {
                                             return (
                                                 <tr key={product?._id}>

@@ -2,7 +2,9 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import FormModal from '../components/FormModal'
 import { Button } from 'react-bootstrap'
-import AsyncCreatableSelect from 'react-select/async-creatable';
+import AsyncCreatableSelect from 'react-select/async-creatable'
+
+import LoadingTable from '../components/LoadingTable'
 
 const dateFormat = (date) => {
 
@@ -529,48 +531,6 @@ export default function Order(props) {
         setShowModal(true)
     }
 
-    // These methods will update the state properties.
-    async function searchTable(event) {
-
-        let query = event.target.value
-        let key = event.key
-
-        if(
-            key === "Enter" ||
-            key === "Space"
-        ) {
-
-            setIsLoading(true)
-
-            const response = await fetch(`${process.env.REACT_APP_URL}order?limit=${limit}&page=${page}&query=${query}`)
-            if (!response.ok) {
-                const message = `An error occurred: ${response.statusText}`
-                window.alert(message)
-                return
-            }
-    
-            const result = await response.json()
-    
-            var orders = result.orders
-            var numOfPages = result.numOfPages
-            var numOfRecords = result.numOfRecords
-            
-            setOrders(orders)
-            setNumOfPages(numOfPages)
-            setNumOfRecords(numOfRecords)
-            setIsLoading(false)
-
-    
-            // switch to first page
-            setPage(0)
-            
-    
-            console.log("result", result)
-            console.log(query)
-        }
-   
-    }
-
     const selectLimit = (value) => {
 
         // Page number of row displayed
@@ -581,6 +541,8 @@ export default function Order(props) {
     }
 
     async function getOrders() {
+
+        setIsLoading(true)
 
         const response = await fetch(`${process.env.REACT_APP_URL}order?limit=${limit}&page=${page}&product_id=${props.product_id ? props.product_id : ""}`)
         if (!response.ok) {
@@ -598,6 +560,7 @@ export default function Order(props) {
         setOrders(orders)
         setNumOfPages(numOfPages)
         setNumOfRecords(numOfRecords)
+        setIsLoading(false)
 
         console.log("result", result)
 
@@ -680,6 +643,13 @@ export default function Order(props) {
                                 </thead>
                                 <tbody>
                                     {   
+
+                                        isLoading ? 
+
+                                            <LoadingTable row={10} col={8} /> 
+                                        
+                                        :
+
                                         orders.map((order, index) => {
                                             return (
                                                 <tr key={order._id}>
@@ -719,6 +689,19 @@ export default function Order(props) {
                                                 </tr>
                                             )
                                         })
+                                    }
+
+                                    {
+                                        !orders.length && !isLoading ?
+                                        
+                                            <tr>
+                                                <td colSpan="8" className="text-center">
+                                                    <span className='mt-5 mb-5'> Not Found /  No Data </span>
+                                                </td>
+                                            </tr>
+                                        : 
+                                        
+                                        null
                                     }
 
                                 </tbody>

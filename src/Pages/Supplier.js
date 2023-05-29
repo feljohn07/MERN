@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react'
 import FormModal from '../components/FormModal'
 import { Button, Placeholder } from 'react-bootstrap'
 
+import LoadingTable from '../components/LoadingTable'
+
 const CreateForm = (props) => {
     
     const [ form, setForm ] = useState({
@@ -328,6 +330,7 @@ export default function Supplier() {
     const [ numOfPages, setNumOfPages ] = useState(0)
     const [ numOfRecords, setNumOfRecords ] = useState(0)
     const [ page, setPage ] = useState(0)
+    const [ isLoading, setIsLoading ] = useState(false)
 
     // TABLE ARRAY
     const [ suppliers, setSuppliers ] = useState([])
@@ -346,6 +349,8 @@ export default function Supplier() {
     // These methods will update the state properties.
     async function searchTable(query) {
 
+        setIsLoading(true)
+
         const response = await fetch(`${process.env.REACT_APP_URL}supplier?limit=${limit}&page=${page}&query=${query}`)
         if (!response.ok) {
             const message = `An error occurred: ${response.statusText}`
@@ -362,6 +367,7 @@ export default function Supplier() {
         setSuppliers(suppliers)
         setNumOfPages(numOfPages)
         setNumOfRecords(numOfRecords)
+        setIsLoading(false)
 
         // switch to first page
         setPage(0)
@@ -381,6 +387,8 @@ export default function Supplier() {
 
     async function getSuppliers() {
 
+        setIsLoading(true)
+
         const response = await fetch(`${process.env.REACT_APP_URL}supplier?limit=${limit}&page=${page}`)
         if (!response.ok) {
             const message = `An error occurred: ${response.statusText}`
@@ -397,6 +405,7 @@ export default function Supplier() {
         setSuppliers(suppliers)
         setNumOfPages(numOfPages)
         setNumOfRecords(numOfRecords)
+        setIsLoading(false)
 
         console.log("result", result)
 
@@ -465,6 +474,13 @@ export default function Supplier() {
                                 </thead>
                                 <tbody>
                                     {
+
+                                        isLoading ? 
+                                        
+                                        <LoadingTable row={10} col={5} /> 
+                                        
+                                        :
+
                                         suppliers.map((supplier, index) => {
                                             return (
                                                 <tr key={supplier._id}>
@@ -500,6 +516,15 @@ export default function Supplier() {
                                                 </tr>
                                             )
                                         })
+                                    }
+
+                                    {
+                                        suppliers.length == 0 && !isLoading ?
+                                            <tr>
+                                                <td colSpan="5" className="text-center">Not Found /  No Data</td>
+                                            </tr>
+                                        :
+                                            null
                                     }
 
                                 </tbody>

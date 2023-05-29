@@ -527,6 +527,18 @@ export default function Customer() {
                                         })
                                     }
 
+                                    {
+                                        !customers.length && !isLoading? 
+                                            <tr>
+                                                <td colSpan={5} className='text-center'>
+                                                    <span className='mt-5 mb-5'> Not Found /  No Data </span>
+                                                </td>
+                                            </tr>
+                                        :
+                                            null
+                                           
+                                    }
+
                                 </tbody>
                             </table>
                         </div>

@@ -659,7 +659,7 @@ export default function Order(props) {
                             <div class="col-md-6">
                                 <div class="text-md-end dataTables_filter" id="dataTable_filter">
                                     <label class="form-label">
-                                        <input disabled="true" type="search" /* onChange={ (e) => searchTable(e.target.value) }  */ onKeyDown={ (e) => searchTable(e) } class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"/>
+                                        {/* <input disabled="true" type="search" onKeyDown={ (e) => searchTable(e) } class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"/> */}
                                     </label>
                                 </div>
                             </div>

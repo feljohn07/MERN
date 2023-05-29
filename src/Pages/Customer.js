@@ -357,7 +357,7 @@ export default function Customer() {
 
             setIsLoading(true)
 
-            const response = await fetch(`${process.env.REACT_APP_URL}?limit=${limit}&page=${page}&query=${query}`)
+            const response = await fetch(`${process.env.REACT_APP_URL}customer?limit=${limit}&page=${page}&query=${query}`)
             if (!response.ok) {
                 const message = `An error occurred: ${response.statusText}`
                 window.alert(message)

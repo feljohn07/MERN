@@ -323,8 +323,6 @@ const DeleteConfirm = (props) => {
 
 export default function Customer() {
 
-    const [ selectID, setID ] = useState("")
-
     // PAGINATION
     const [ limit, setLimit ] = useState(10)
     const [ numOfPages, setNumOfPages ] = useState(0)

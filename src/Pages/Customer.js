@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import FormModal from '../components/FormModal'
 import { Button } from 'react-bootstrap'
+import LoadingTable from '../components/LoadingTable'
 
 
 const CreateForm = (props) => {
@@ -398,6 +399,8 @@ export default function Customer() {
 
     async function getCustomers() {
 
+        setIsLoading(true)
+
         const response = await fetch(`${process.env.REACT_APP_URL}customer?limit=${limit}&page=${page}`)
         if (!response.ok) {
             const message = `An error occurred: ${response.statusText}`
@@ -414,6 +417,9 @@ export default function Customer() {
         setCustomers(customers)
         setNumOfPages(numOfPages)
         setNumOfRecords(numOfRecords)
+
+        setIsLoading(false)
+
 
         console.log("result", result)
 
@@ -482,6 +488,10 @@ export default function Customer() {
                                 </thead>
                                 <tbody>
                                     {   
+
+                                        isLoading ?
+                                            <LoadingTable />
+                                        :
                                         customers.map((customer, index) => {
                                             return (
                                                 <tr key={customer._id}>

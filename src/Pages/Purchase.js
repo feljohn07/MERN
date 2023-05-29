@@ -4,6 +4,8 @@ import FormModal from '../components/FormModal'
 import { Button } from 'react-bootstrap'
 import AsyncCreatableSelect from 'react-select/async-creatable';
 
+import LoadingTable from '../components/LoadingTable';
+
 const dateFormat = (date) => {
 
     try{
@@ -531,48 +533,6 @@ export default function Purchase(props) {
         setShowModal(true)
     }
 
-    // These methods will update the state properties.
-    async function searchTable(event) {
-
-        let query = event.target.value
-        let key = event.key
-
-        if(
-            key === "Enter" ||
-            key === "Space"
-        ) {
-
-            setIsLoading(true)
-
-            const response = await fetch(`${process.env.REACT_APP_URL}purchase?limit=${limit}&page=${page}&query=${query}`)
-            if (!response.ok) {
-                const message = `An error occurred: ${response.statusText}`
-                window.alert(message)
-                return
-            }
-    
-            const result = await response.json()
-    
-            var purchases = result.purchases
-            var numOfPages = result.numOfPages
-            var numOfRecords = result.numOfRecords
-            
-            setPurchases(purchases)
-            setNumOfPages(numOfPages)
-            setNumOfRecords(numOfRecords)
-            setIsLoading(false)
-
-    
-            // switch to first page
-            setPage(0)
-            
-    
-            console.log("result", result)
-            console.log(query)
-        }
-   
-    }
-
     const selectLimit = (value) => {
 
         // Page number of row displayed
@@ -583,6 +543,8 @@ export default function Purchase(props) {
     }
 
     async function getPurchases() {
+
+        setIsLoading(true)
 
         const response = await fetch(`${process.env.REACT_APP_URL}purchase?limit=${limit}&page=${page}&product_id=${props.product_id ? props.product_id : ""}`)
         if (!response.ok) {
@@ -600,6 +562,7 @@ export default function Purchase(props) {
         setPurchases(purchases)
         setNumOfPages(numOfPages)
         setNumOfRecords(numOfRecords)
+        setIsLoading(false)
 
         console.log("result", result)
 
@@ -680,7 +643,14 @@ export default function Purchase(props) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {   
+                                    {  
+
+                                        isLoading ? 
+                                        
+                                            <LoadingTable row={10} col={8} /> 
+                                        
+                                        :
+
                                         purchases.map((purchase, index) => {
                                             return (
                                                 <tr key={purchase._id}>
@@ -720,6 +690,18 @@ export default function Purchase(props) {
                                                 </tr>
                                             )
                                         })
+                                    }
+
+                                    {
+                                        !purchases.length && !isLoading ?
+                                            <tr>
+                                                <td colSpan={5} className='text-center'>
+                                                    <span className='mt-5 mb-5'> Not Found /  No Data </span>
+                                                </td>
+                                            </tr>
+                                        :
+                                            null   
+
                                     }
 
                                 </tbody>

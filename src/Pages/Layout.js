@@ -9,12 +9,21 @@ export default function Layout() {
     const { logout } = useLogout()
 
     const [ dropdownProfile, setdropdownProfile ] = useState("")
+    const [ sidebar, setSidebar ] = useState("")
 
     const toggleDropdownProfile = () => {
         if (dropdownProfile == "show") {
             setdropdownProfile("")
         } else {
             setdropdownProfile("show")
+        }
+    }
+
+    const toggleSidebar = () => {
+        if (sidebar == "d-none") {
+            setSidebar("")
+        } else {
+            setSidebar("d-none")
         }
     }
 
@@ -26,7 +35,7 @@ export default function Layout() {
         <>
             <div id="wrapper" >
 
-                <nav className= {"navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 " + {/*this.state.toggle*/}}>
+                <nav className= {"navbar navbar-dark align-items-start sidebar sidebar-dark accordion bg-gradient-primary p-0 " + sidebar}>
 
                     <div className="container-fluid d-flex flex-column p-0">
 
@@ -84,6 +93,9 @@ export default function Layout() {
                     <div id="content">
 
                         <nav className="navbar navbar-light navbar-expand bg-white shadow topbar static-top">
+                            <button className='btn m-3 d-none d-sm-block d-md-none' onClick={toggleSidebar}>
+                                <i class="fa fa-bars"></i>
+                            </button> 
                             <div className="container-fluid">
                                 <ul className="navbar-nav flex-nowrap ms-auto">
                                     <div className="d-none d-sm-block topbar-divider">

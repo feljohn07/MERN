@@ -312,7 +312,7 @@ const DeleteConfirm = (props) => {
                     variant="danger" 
                     onClick={ ()=> deleteCustomer() }
                 >
-                    { isSubmitting ? <div class="spinner-border spinner-border-sm mx-3" role="status"> <span class="sr-only">Loading...</span> </div> : "Delete Costumer"}
+                    { isSubmitting ? <div class="spinner-border spinner-border-sm mx-3" role="status"> <span class="sr-only">Loading...</span> </div> : "Delete Supplier"}
                 </Button>
             </div>
 

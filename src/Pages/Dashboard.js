@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
+import LineGraph from '../components/LineGraph'
 
 export default function Dashboard() {
 
@@ -105,6 +106,9 @@ export default function Dashboard() {
                             </div>
                         </div>
                     </div>
+                </div>
+                <div>
+                    <LineGraph/>
                 </div>
             </div>
         </div>

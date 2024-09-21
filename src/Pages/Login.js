@@ -110,7 +110,7 @@ export default function Login() {
                                                     </button>
 
                                                     <hr />
-                                                    <!--
+                                                    {/*
                                                     <button 
                                                         class="btn btn-primary d-block btn-google btn-user w-100 mb-2" 
                                                         onClick={() => googleLogin()}
@@ -118,7 +118,7 @@ export default function Login() {
                                                     >
                                                         <i class="fab fa-google"></i>  Login with Google
                                                     </button>
-                                                    -->
+                                                    */}
                                                 </form>
                                                 <div class="text-center"></div>
                                                 <div class="text-center">
